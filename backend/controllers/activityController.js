@@ -11,11 +11,17 @@ exports.getActivities = async (req, res) => {
 
 exports.addActivity = async (req, res) => {
   const { date, water, exercise } = req.body;
+
+  if (!date || typeof water !== 'number' || typeof exercise !== 'number') {
+    return res.status(400).json({ message: 'Invalid input data' });
+  }
+
   const newActivity = new Activity({ date, water, exercise });
   try {
     const savedActivity = await newActivity.save();
     res.status(201).json(savedActivity);
   } catch (error) {
+    console.error('Error saving activity:', error);
     res.status(400).json({ message: error.message });
   }
 };

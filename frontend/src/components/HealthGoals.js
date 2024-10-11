@@ -9,9 +9,8 @@ function HealthGoals() {
 
     const fetchGoals = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/goals');
-            const data = await response.json();
-            setGoals(data);
+            const response = await axios.get('https://fitgoals.onrender.com/api/goals');
+            setGoals(response.data);
         } catch (error) {
             console.error('Error fetching goals:', error);
         }
@@ -26,36 +25,25 @@ function HealthGoals() {
         const newGoal = { title, description, targetDate };
 
         try {
-            const response = await fetch('http://localhost:5000/api/goals/add', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newGoal),
-            });
-
-            if (response.ok) {
-                const savedGoal = await response.json();
-                setGoals([...goals, savedGoal]);
-                setTitle('');
-                setDescription('');
-                setTargetDate('');
-            } else {
-                alert('Failed to add goal.');
-            }
+            const response = await axios.post('https://fitgoals.onrender.com/api/goals/add', newGoal);
+            setGoals([...goals, response.data]);
+            setTitle('');
+            setDescription('');
+            setTargetDate('');
         } catch (error) {
             console.error('Error adding goal:', error);
-            alert('An error occurred.');
+            alert('An error occurred while adding the goal.');
         }
     };
 
     const handleDelete = async (id) => {
-      try {
-          await axios.delete(`http://localhost:5000/api/goals/${id}`); 
-          setGoals(goals.filter(goal => goal._id !== id));
-      } catch (error) {
-          console.error('Error deleting goal:', error);
-      }
-  };
-  
+        try {
+            await axios.delete(`https://fitgoals.onrender.com/api/goals/${id}`);
+            setGoals(goals.filter(goal => goal._id !== id));
+        } catch (error) {
+            console.error('Error deleting goal:', error);
+        }
+    };
 
     return (
         <div>

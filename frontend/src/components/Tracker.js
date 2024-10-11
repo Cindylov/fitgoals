@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../App.css'
+import '../App.css';
 
 function Tracker() {
   const [water, setWater] = useState('');
@@ -10,7 +10,7 @@ function Tracker() {
     const data = { water: Number(water), exercise: Number(exercise) };
 
     try {
-      const response = await fetch('http://localhost:5000/api/activities/add', {
+      const response = await fetch('https://fitgoals.onrender.com/api/activities', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -21,11 +21,12 @@ function Tracker() {
         setWater('');
         setExercise('');
       } else {
-        alert('Failed to log activity.');
+        const errorData = await response.json(); // Get error response
+        alert(`Failed to log activity: ${errorData.message || 'Unknown error'}`);
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('An error occurred.');
+      alert('An error occurred while logging the activity.');
     }
   };
 
@@ -34,9 +35,18 @@ function Tracker() {
       <h2 className="text-2xl font-bold text-green-600 mb-4">Daily Activity Tracker</h2>
 
       <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-      <div className='video-container mb-4'>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/t3pExN5hKJc" title="YouTube Video Player" frameBorder="0" allow="accelerometer; autoplay; clipboard-writer; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-      </div>
+        <div className='video-container mb-4'>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/t3pExN5hKJc"
+            title="YouTube Video Player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-writer; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="responsive-video"
+          ></iframe>
+        </div>
 
         <div className="mb-4">
           <label className="block mb-2">Water Intake (in glasses):</label>
