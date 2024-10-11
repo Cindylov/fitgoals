@@ -4,8 +4,8 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "scripts": {
-    "build": "cd frontend && npm install && npm run build",  
-    "start": "node backend/server.js", 
+    "build": "cd frontend && npm install && npm run build && cd .. && cd backend && npm install", 
+    "start": "node backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
