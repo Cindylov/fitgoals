@@ -7,7 +7,7 @@ function ProgressDashboard() {
     useEffect(() => {
         const fetchActivities = async () => {
             try {
-                const response = await fetch('https://fitgoals.onrender.com/api/activities');
+                const response = await fetch('https://fitgoals.onrender.com/api/activities');  // Updated URL
                 const data = await response.json();
                 setActivities(data);
             } catch (error) {
@@ -20,7 +20,7 @@ function ProgressDashboard() {
     const handleDelete = async (id) => {
         console.log('Deleting activity with ID:', id);
         try {
-            await axios.delete(`https://fitgoals.onrender.com/api/activities/${id}`);
+            await axios.delete(`https://fitgoals.onrender.com/api/activities/${id}`);  // Updated URL
             setActivities(activities.filter(activity => activity._id !== id));
         } catch (error) {
             console.error('Error deleting activity:', error); 
