@@ -1,13 +1,13 @@
 const Activity = require('../models/Activity');
 
-exports.getActivities = async (req, res) => {
+app.get('/api/activities', async (req, res) => {
   try {
-    const activities = await Activity.find();
+    const activities = await Activity.find({});
     res.json(activities);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: 'Error fetching activities' });
   }
-};
+});
 
 exports.addActivity = async (req, res) => {
   try {

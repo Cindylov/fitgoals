@@ -16,6 +16,8 @@ function Tracker() {
         body: JSON.stringify(data),
       });
       if (response.ok) {
+        const responseData = await response.json(); 
+        console.log('Logged Activity:', responseData); 
         alert('Activity logged successfully!');
         setWater('');
         setExercise('');
