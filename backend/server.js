@@ -5,7 +5,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const activityRoutes = require('./routes/activities');  
+// const activityRoutes = require('./routes/activities');
+const { addActivity } = require('./controllers/activityController');  
 const goalsRouter = require('./routes/goals');  
 
 const app = express();
@@ -24,8 +25,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 const PORT = process.env.PORT || 5000;
 
-app.post('/api/activities', addActivity);
-app.use('/api/activities', activityRoutes);  
+app.post('/api/activities', addActivity); 
+// app.use('/api/activities', activityRoutes);  
 app.use('/api/goals', goalsRouter);
 
 app.use(express.static(path.join(__dirname, '../frontend/build')));

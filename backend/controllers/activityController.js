@@ -10,10 +10,9 @@ exports.getActivities = async (req, res) => {
 };
 
 exports.addActivity = async (req, res) => {
-  console.log(req.body);  // <-- Add this to see what's being sent
-  const { date, water, exercise } = req.body;
-  const newActivity = new Activity({ date, water, exercise });
   try {
+    const { water, exercise } = req.body;
+    const newActivity = new Activity({ water, exercise, date: new Date() });
     const savedActivity = await newActivity.save();
     res.status(201).json(savedActivity);
   } catch (error) {
