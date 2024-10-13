@@ -1,9 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { getActivities, addActivity, deleteActivity } = require('../controllers/activityController');
+const { getAllActivities, addActivity, deleteActivity } = require('../controllers/activityController');
 
-router.get('/', getActivities);           
-router.post('/add', addActivity);         
-router.delete('/:id', deleteActivity); 
+// Route to get all activities
+router.get('/', getAllActivities);
+
+// Route to add a new activity
+router.post('/', addActivity); 
+
+// Route to delete an activity by ID
+router.delete('/:id', deleteActivity);
 
 module.exports = router;

@@ -4,26 +4,26 @@ import axios from 'axios';
 function ProgressDashboard() {
     const [activities, setActivities] = useState([]);
 
+    const fetchActivities = async () => {
+        try {
+            const response = await fetch('https://fitgoals.onrender.com/api/activities');
+            const data = await response.json();
+            console.log('Fetched Activities:', data); 
+            setActivities(data);
+        } catch (error) {
+            console.error('Error fetching activities:', error);
+        }
+    };
+
     useEffect(() => {
-        const fetchActivities = async () => {
-            try {
-              const response = await fetch('https://fitgoals.onrender.com/api/activities');
-              const data = await response.json();
-              console.log('Fetched Activities:', data); 
-              setActivities(data);
-            } catch (error) {
-              console.error('Error fetching activities:', error);
-            }
-          };
-          
         fetchActivities();
     }, []);
 
     const handleDelete = async (id) => {
         console.log('Deleting activity with ID:', id);
         try {
-            await axios.delete(`https://fitgoals.onrender.com/api/activities/${id}`);  
-            setActivities(activities.filter(activity => activity._id !== id));
+            await axios.delete(`https://fitgoals.onrender.com/api/activities/${id}`);
+            fetchActivities(); 
         } catch (error) {
             console.error('Error deleting activity:', error); 
         }
