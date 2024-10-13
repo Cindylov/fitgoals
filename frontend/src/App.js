@@ -48,7 +48,7 @@ function App() {
           </div>
 
           <ul
-            className={`lg:flex space-x-4 lg:justify-end ${isOpen ? 'block absolute -top-14 -right-48 mt-12 p-4 bg-green-600 w-full' : 'hidden'} lg:block`}
+            className={`lg:flex space-x-4 lg:justify-end ${isOpen ? 'block absolute -top-14 -right-48 mt-12 p-4 bg-green-600 w-40' : 'hidden'} lg:block`}
           >
             {isOpen && (
               <li className="mt-2 lg:mt-0">

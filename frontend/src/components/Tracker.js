@@ -20,12 +20,12 @@ function Tracker() {
         setWater('');
         setExercise('');
       } else {
-        const errorData = await response.json(); // Get error response
-        console.error('Error response:', errorData); // Log error for debugging
+        const errorData = await response.json(); 
+        console.error('Error response:', errorData); 
         alert(`Failed to log activity: ${errorData.message || 'Unknown error'}`);
       }
     } catch (error) {
-      console.error('Error:', error); // Log the error
+      console.error('Error:', error); 
       alert('An error occurred while logging the activity.');
     }
   };  
